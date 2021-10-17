@@ -8,7 +8,7 @@ const slides = document.querySelectorAll('.feedback_slide')
 let slideCount = 0
 
 
-function toggleSlide() {  
+function toggleSlide() {
   slides.forEach(item => {
     item.classList.add('hide')
   })
@@ -22,15 +22,15 @@ arrowLeft.addEventListener('click', function () {
   if (slideCount === 0) {
     slideCount = slides.length - 1
     toggleSlide()
-    toggleDots()       
-  } else {    
+    toggleDots()
+  } else {
     --slideCount
     toggleSlide()
     toggleDots()
   }
 })
 
-arrowRight.addEventListener('click', function () {  
+arrowRight.addEventListener('click', function () {
   if (slideCount < slides.length - 1) {
     ++slideCount
     toggleSlide()
@@ -43,7 +43,7 @@ arrowRight.addEventListener('click', function () {
 })
 
 
-const createDots = () => {  
+const createDots = () => {
 
   for (let i = 0; i < slides.length; i++) {
     const dot = document.createElement('div')
@@ -53,12 +53,12 @@ const createDots = () => {
 
   const dots = document.querySelectorAll('.slider_dot')
   dots[0].classList.add('dot_active')
-  dots.forEach(item => item.addEventListener('click', function(e) {    
+  dots.forEach(item => item.addEventListener('click', function (e) {
     const dots = document.querySelectorAll('.slider_dot')
     console.log(item);
 
     if (e.target.classList.contains('dot_active')) {
-  
+
       return false
     } else {
       const dots = document.querySelectorAll('.slider_dot')
@@ -68,7 +68,7 @@ const createDots = () => {
       dots.forEach((item, index) => {
         if (item.classList.contains('dot_active')) {
           console.log(index);
-          slideCount = index                    
+          slideCount = index
         }
       })
     }
@@ -77,7 +77,7 @@ const createDots = () => {
 
 function toggleDots() {
   const dots = document.querySelectorAll('.slider_dot')
-  
+
   dots.forEach(item => item.classList.remove('dot_active'));
   dots[slideCount].classList.add('dot_active')
 }
@@ -93,15 +93,23 @@ const navItem = document.querySelectorAll('.header_nav_list li')
 
 navItem.forEach(item => {
   item.addEventListener('click', () => {
-    scrollToElem(item.dataset.scrollto)    
+    scrollToElem(item.dataset.scrollto)
   })
 })
 
 function scrollToElem(elem) {
-  const element = document.querySelector(`.${elem}`)  
+  const element = document.querySelector(`.${elem}`)
   const box = element.getBoundingClientRect()
   scrollTo({
     top: box.top + pageYOffset,
     behavior: 'smooth'
   })
 }
+
+//loader 
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(() => {
+    document.querySelector('body').classList.remove('scroll-lock')
+    document.querySelector('.loader_wrap').remove()    
+  }, 1000)  
+})
